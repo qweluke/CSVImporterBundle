@@ -1,9 +1,9 @@
-form#qweluke_databinding div {
+form #qweluke_databinding div {
   border-bottom: 1px solid #ccc;
   padding-top: 10px; }
-  form#qweluke_databinding div label {
+  form #qweluke_databinding div label {
     min-width: 200px; }
-    form#qweluke_databinding div label.required {
+    form #qweluke_databinding div label.required {
       color: #F44336; }
 
 h4 {
@@ -11,10 +11,9 @@ h4 {
 
 .row {
   margin-bottom: 20px; }
-
-.row .row {
-  margin-top: 10px;
-  margin-bottom: 0; }
+  .row.row {
+    margin-top: 10px;
+    margin-bottom: 0; }
 
 hr {
   margin-top: 40px;

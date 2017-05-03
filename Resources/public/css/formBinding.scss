@@ -1,13 +1,14 @@
-form#qweluke_databinding {
-  & div {
-    border-bottom: 1px solid #ccc;
-    padding-top: 10px;
-    label {
-      min-width: 200px;
-      &.required {
-        color: #F44336;
+form {
+  & #qweluke_databinding {
+    & div {
+      border-bottom: 1px solid #ccc;
+      padding-top: 10px;
+      label {
+        min-width: 200px;
+        &.required {
+          color: #F44336;
+        }
       }
     }
   }
-
 }
