@@ -83,6 +83,13 @@ Add the following configuration to your `parameters.yml`
       max: 50
 ```
 
+Enable symfony serializer in `config.yml`. This is a "must" for parsing CSV into array. If you don't want to use symfony serializer, you must override `ImportController::indexAction` from this bundle
+```yaml
+# app/config/config.yml
+  framework:
+      serializer: { enable_annotations: true }
+```
+
 
 ##### Step 5: Import routing files 
 ```yaml
