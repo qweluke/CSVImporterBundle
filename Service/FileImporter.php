@@ -27,9 +27,16 @@ class FileImporter
      */
     private $em;
 
+    /** user mapped import class */
     private $importEntity;
 
 
+    /**
+     * FileImporter constructor.
+     * @param FileValidator $validator
+     * @param EntityManager $manager
+     * @param $entity
+     */
     public function __construct(FileValidator $validator, EntityManager $manager, $entity)
     {
         $this->validator = $validator;
@@ -61,7 +68,8 @@ class FileImporter
         foreach ($fieldNames as $field) {
 
             /** ex. givenName => given_name */
-            $ormTableColNames[$this->dashesToCamelCase($field)] = $field;
+            $dataKey = lcfirst(str_replace('_', '', ucwords($field, '_')));
+            $ormTableColNames[$dataKey] = $field;
         }
 
         /**
@@ -124,6 +132,13 @@ class FileImporter
         ];
     }
 
+
+    /**
+     * Function for importing prepared data to the database
+     *
+     * @param array $parsedData
+     * @return array
+     */
     public function import(array $parsedData)
     {
 
@@ -149,11 +164,4 @@ class FileImporter
         ];
     }
 
-
-    private function dashesToCamelCase($string)
-    {
-        $str = str_replace('_', '', ucwords($string, '_'));
-        $str = lcfirst($str);
-        return $str;
-    }
 }
