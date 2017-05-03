@@ -16,7 +16,7 @@ Add this bundle to your composer.json file:
         }
     ],
     "require": {
-        "qweluke/CSVImporterBundle": "master"
+        "qweluke/CSVImporterBundle": "dev-master"
     }
 }
 ```
