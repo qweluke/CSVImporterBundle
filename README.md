@@ -139,3 +139,4 @@ https://raw.githubusercontent.com/qweluke/CSVImporterBundle/master/example_file.
 
 ![import-csv](https://github.com/qweluke/CSVImporterBundle/blob/master/1493795917982screensave.png?raw=true)
 ![bind-data](https://github.com/qweluke/CSVImporterBundle/blob/master/1493795962252screensave.png?raw=true)
+![summary](https://github.com/qweluke/CSVImporterBundle/blob/master/1493795917983screensave.png?raw=true)
