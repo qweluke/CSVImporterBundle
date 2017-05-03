@@ -5,8 +5,9 @@ namespace Qweluke\CSVImporterBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @author Łukasz Malicki
  * Class Import
+ *
+ * @author Łukasz Malicki
  * @package Qweluke\CSVImporterBundle\Model
  *
  */
