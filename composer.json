@@ -16,7 +16,7 @@
     "symfony/framework-bundle": "~3.2"
   },
   "autoload": {
-    "psr-4": { "Qweluke\\CSVImporterBundle": "" }
+    "psr-4": { "Qweluke\\CSVImporterBundle\\": "" }
   },
   "extra": {
     "branch-alias": {
