@@ -100,7 +100,7 @@ php app/console doctrine:schema:update --force
 
 You can now use bundle. Go to `http://yourdomain.tdl/app_dev.php/import-csv`!
 
-### make it prittier ;-)
+### make it prettier ;-)
 #### Importing styles
 This bundle uses Twitter Bootstrap 3. You need to use it if you want to use this view.
 
