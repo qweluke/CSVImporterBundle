@@ -19,6 +19,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ColumnBindingType extends AbstractType
 {
+
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $requiredFields = $options['requiredFields'];
@@ -64,6 +69,9 @@ class ColumnBindingType extends AbstractType
 
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

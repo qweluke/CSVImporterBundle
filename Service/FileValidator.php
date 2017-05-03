@@ -23,6 +23,12 @@ class FileValidator
      */
     private $fieldsCount;
 
+
+    /**
+     * FileValidator constructor.
+     * @param $requiredFields
+     * @param $fieldsCount
+     */
     public function __construct($requiredFields, $fieldsCount)
     {
         $this->requiredFields = $requiredFields;
@@ -68,7 +74,14 @@ class FileValidator
         return true;
     }
 
-//    TODO: handle mepty value
+
+    /**
+     * in_array for array of $needles
+     *
+     * @param $needles
+     * @param $haystack
+     * @return bool
+     */
     private function in_array_all($needles, $haystack)
     {
         return !array_diff($needles, $haystack);

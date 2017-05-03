@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Łukasz Malicki
- * Date: 2017-05-02
- * Time: 10:31 AM
- */
 
 namespace Qweluke\CSVImporterBundle\Exception;
 
