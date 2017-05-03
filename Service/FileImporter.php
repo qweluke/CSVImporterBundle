@@ -30,9 +30,10 @@ class FileImporter
      *
      * @param array $importData
      * @param array $bindingSchema
+     * @param array $entityColumns
      * @return array
      */
-    public function prepareData(array $importData, array $bindingSchema)
+    public function prepareData(array $importData, array $bindingSchema, array $entityColumns)
     {
         $stopwatch = new Stopwatch();
         $stopwatch->start('parseData');
