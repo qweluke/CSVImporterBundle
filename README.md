@@ -139,6 +139,10 @@ Create `layout.html.twig` in your `app/Resources/views/QwelukeCSVImporterBundle/
     </div>
 {% endblock %}
 ```
+
+#### TODO:
+ unit testing ;-)
+
 ### example import file:
 https://raw.githubusercontent.com/qweluke/CSVImporterBundle/master/example_file.csv
 
