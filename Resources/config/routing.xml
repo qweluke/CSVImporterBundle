@@ -10,4 +10,7 @@
     <route id="qweluke_csv_importer_bind" path="/bind-columns" methods="GET|POST">
         <default key="_controller">QwelukeCSVImporterBundle:Import:bindColumns</default>
     </route>
+    <route id="qweluke_csv_importer_summary" path="/summary" methods="GET">
+        <default key="_controller">QwelukeCSVImporterBundle:Import:summary</default>
+    </route>
 </routes>

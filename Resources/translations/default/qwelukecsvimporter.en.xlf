@@ -36,6 +36,35 @@
                 <source>select_file</source>
                 <target>Please select file to import.</target>
             </trans-unit>
+
+            <trans-unit id="import_success.h1">
+                <source>import_success.h1</source>
+                <target>File successfully imported!</target>
+            </trans-unit>
+            <trans-unit id="import_success.text">
+                <source>import_success.text</source>
+                <target>You file has been imported to the database. Please check details below. We are ready to import another file.</target>
+            </trans-unit>
+            <trans-unit id="import_success.btn">
+                <source>import_success.btn</source>
+                <target>Import new file</target>
+            </trans-unit>
+            <trans-unit id="import_success.summary.totalImported">
+                <source>import_success.summary.totalImported</source>
+                <target>Imported rows</target>
+            </trans-unit>
+            <trans-unit id="import_success.summary.executionTime">
+                <source>import_success.summary.executionTime</source>
+                <target>Execution time</target>
+            </trans-unit>
+            <trans-unit id="import_success.summary.totalFailed">
+                <source>import_success.summary.totalFailed</source>
+                <target>Failed rows (not imported)</target>
+            </trans-unit>
+            <trans-unit id="import_success.summary.check_details">
+                <source>import_success.summary.check_details</source>
+                <target>please check details below</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

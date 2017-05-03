@@ -1,0 +1,41 @@
+{% extends ':QwelukeCSVImporterBundle:layout.html.twig' %}
+
+{% block qweluke_csvimporter_content %}
+
+    <div class="jumbotron">
+        <h1>{{ 'import_success.h1'|trans({}, 'qwelukecsvimporter') }}</h1>
+        <p class="lead">{{ 'import_success.text'|trans({}, 'qwelukecsvimporter') }}</p>
+        <p><a class="btn btn-lg btn-success" href="{{ path('qweluke_csv_importer_import') }}"
+              role="button">{{ 'import_success.btn'|trans({}, 'qwelukecsvimporter') }}</a></p>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 text-center">
+            <h2>{{ 'import_success.summary.totalImported'|trans({}, 'qwelukecsvimporter') }}</h2>
+            <p>
+            <h1 class="{{ summary.imported > 0 ? 'text-success' : 'text-danger' }}">{{ summary.imported }}</h1>
+            </p>
+
+        </div>
+        <div class="col-lg-4 text-center">
+            <h2>{{ 'import_success.summary.executionTime'|trans({}, 'qwelukecsvimporter') }}</h2>
+            <h1>{{ summary.duration }}ms / {{ summary.duration/1000 }}s</h1>
+        </div>
+        <div class="col-lg-4 text-center">
+            <h2>{{ 'import_success.summary.totalFailed'|trans({}, 'qwelukecsvimporter') }}</h2>
+            <h1 class="{{ summary.failed|length == 0 ? 'text-success' : 'text-danger' }}">{{ summary.failed|length }}</h1>
+
+            {% if summary.failed|length > 0 %}
+                <p class="text-muted">{{ 'import_success.summary.check_details'|trans({}, 'qwelukecsvimporter') }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if summary.failed|length > 0 %}
+        <div class="row">
+            <div class="col-md-12">
+                {{ dump(summary.failed) }}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -8,21 +8,33 @@
 
 namespace Qweluke\CSVImporterBundle\Service;
 
+use Doctrine\ORM\EntityManager;
 use Qweluke\CSVImporterBundle\Exception\InvalidFileException;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 class FileImporter
 {
 
+    const batchSize = 100;
+
     /**
      * @var FileValidator
      */
     private $validator;
 
+    /**
+     * @var EntityManager
+     */
+    private $em;
 
-    public function __construct(FileValidator $validator)
+    private $importEntity;
+
+
+    public function __construct(FileValidator $validator, EntityManager $manager, $entity)
     {
         $this->validator = $validator;
+        $this->em = $manager;
+        $this->importEntity = $entity;
     }
 
     /**
@@ -30,13 +42,27 @@ class FileImporter
      *
      * @param array $importData
      * @param array $bindingSchema
-     * @param array $entityColumns
      * @return array
      */
     public function prepareData(array $importData, array $bindingSchema, array $entityColumns)
     {
         $stopwatch = new Stopwatch();
         $stopwatch->start('parseData');
+
+
+        /**
+         * get mysql column names. They can be different than entity fields ( _ separated)
+         */
+        $fieldNames = $this->em->getClassMetadata($this->importEntity)->getColumnNames();
+
+
+        /** create assoc array to bind entityField <-> mysql column name */
+        $ormTableColNames = [];
+        foreach ($fieldNames as $field) {
+
+            /** ex. givenName => given_name */
+            $ormTableColNames[$this->dashesToCamelCase($field)] = $field;
+        }
 
         /**
          * Contains information about user selected and mapped fields
@@ -51,16 +77,18 @@ class FileImporter
                 continue;
             }
 
-            $binded[strtolower($column['column'])] = $column['mappedChoice'];
+            $binded[$column['column']] = $column['mappedChoice'];
         }
 
-        $bindedKeys = array_flip(array_keys($binded));
+
+        $importKeys = array_keys($importData[0]);
 
 
         $unImported = [];
         $toImport = [];
         foreach ($importData as $row) {
 
+            /** validate each CSV row */
             try {
                 $this->validator->validate($row);
             } catch (InvalidFileException $ex) {
@@ -68,11 +96,24 @@ class FileImporter
                 continue;
             }
 
-            $row = array_change_key_case($row, CASE_LOWER);
+            $importRow = [];
 
-            /** combine mapped fields with imported file */
-            $toImport[] = array_intersect_key($row, $bindedKeys);
+            /** map csv column with mysql column name */
+            foreach ($binded as $colName => $colIndex) {
+
+                /** CSV column key */
+                $key = $importKeys[$colIndex];
+
+                /** mysql column name */
+                $colname = $ormTableColNames[$colName];
+
+                /** create assoc array mysqlColName => csvColumnValue */
+                $importRow[$colname] = $row[$key];
+            }
+
+            $toImport[] = $importRow;
         }
+
 
         $event = $stopwatch->stop('parseData');
 
@@ -85,13 +126,34 @@ class FileImporter
 
     public function import(array $parsedData)
     {
+
         $stopwatch = new Stopwatch();
         $stopwatch->start('inserting');
+
+        $tableName = $this->em->getClassMetadata($this->importEntity)->getTableName();
+
+
+        $this->em->getConnection()->transactional(function ($connection) use ($parsedData, $tableName) {
+            foreach ($parsedData['toImport'] as $row) {
+
+                $connection->insert($tableName, $row);
+            }
+        });
 
         $event = $stopwatch->stop('inserting');
 
         return [
+            'imported' => count($parsedData['toImport']),
+            'failed' => $parsedData['failed'],
             'duration' => $event->getDuration()
         ];
+    }
+
+
+    private function dashesToCamelCase($string)
+    {
+        $str = str_replace('_', '', ucwords($string, '_'));
+        $str = lcfirst($str);
+        return $str;
     }
 }

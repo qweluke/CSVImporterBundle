@@ -23,6 +23,8 @@
 
         <service id="qweluke_csv_importer.file_importer" class="Qweluke\CSVImporterBundle\Service\FileImporter">
             <argument type="service" id="qweluke_csv_importer.file_validator" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%qweluke_csvimporter_import_class%</argument>
         </service>
 
         <service id="qweluke_csv_importer.form_binder" class="Qweluke\CSVImporterBundle\Form\DataBindForm">
