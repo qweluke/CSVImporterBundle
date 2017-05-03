@@ -100,7 +100,38 @@ php app/console doctrine:schema:update --force
 
 You can now use bundle. Go to `http://yourdomain.tdl/app_dev.php/import-csv`!
 
+### make it prittier ;-)
+#### Importing styles
+This bundle uses Twitter Bootstrap 3. You need to use it if you want to use this view.
 
+You can import csv importer styles (only custom styles, without bootstrap) like this:
+```html
+<link rel="stylesheet" href="{{ asset('bundles/qwelukecsvimporter/css/style.css') }}">
+```
+
+#### Extending the view
+Create `layout.html.twig` in your `app/Resources/views/QwelukeCSVImporterBundle/` directory
+```html
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+
+        {% for label, flashes in app.session.flashbag.all %}
+            {% for flash in flashes %}
+                <div class="alert alert-{{ label }}">{{ flash }}</div>
+            {% endfor %}
+        {% endfor %}
+
+        <div class="page-header">
+            <h1>Qweluke CSV Importer</h1>
+            <p class="lead">{{ 'pageheader.text'|trans({}, 'qwelukecsvimporter') }}</p>
+        </div>
+
+        {% block qweluke_csvimporter_content %}{% endblock %}
+    </div>
+{% endblock %}
+```
 ### example import file:
 https://raw.githubusercontent.com/qweluke/CSVImporterBundle/master/example_file.csv
 
