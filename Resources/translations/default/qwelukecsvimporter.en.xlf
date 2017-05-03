@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="form.file">
+                <source>form.file</source>
+                <target>Upload a file:</target>
+            </trans-unit>
+
+            <trans-unit id="bind_columns.import">
+                <source>bind_columns.import</source>
+                <target>Import</target>
+            </trans-unit>
+
+            <trans-unit id="bind_columns.database_field">
+                <source>bind_columns.database_field</source>
+                <target>DataBase Column</target>
+            </trans-unit>
+
+            <trans-unit id="bind_columns.form_yellow">
+                <source>bind_columns.form_yellow</source>
+                <target>Rows highlighted as yelow are required</target>
+            </trans-unit>
+
+            <trans-unit id="bind_columns.csv_field">
+                <source>bind_columns.csv_field</source>
+                <target>CSV Column</target>
+            </trans-unit>
+
+            <trans-unit id="pageheader.text">
+                <source>pageheader.text</source>
+                <target>Example bundle for importing CSV files.</target>
+            </trans-unit>
+
+            <trans-unit id="select_file">
+                <source>select_file</source>
+                <target>Please select file to import.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

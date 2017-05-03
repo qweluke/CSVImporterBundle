@@ -1,0 +1,19 @@
+{% extends ':QwelukeCSVImporterBundle:layout.html.twig' %}
+
+{% block qweluke_csvimporter_content %}
+
+
+    <div class="jumbotron">
+        <h2>{{ 'select_file'|trans({}, 'qwelukecsvimporter') }}</h2>
+
+        {{ form_start(form) }}
+
+        {{ form_rest(form) }}
+
+        <p>
+            <button class="btn btn-lg btn-primary" role="button" type="submit" >{{ 'form.submit'|trans({}, 'qwelukecsvimporter_form') }}</button>
+        </p>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

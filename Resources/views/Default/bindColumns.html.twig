@@ -1,0 +1,40 @@
+{% extends ':QwelukeCSVImporterBundle:layout.html.twig' %}
+
+{% block qweluke_csvimporter_content %}
+
+    {{ form_start(form) }}
+
+    <table class="table">
+        <thead>
+        <th>{{ 'bind_columns.import'|trans({}, 'qwelukecsvimporter') }}</th>
+        <th>{{ 'bind_columns.database_field'|trans({}, 'qwelukecsvimporter') }}</th>
+        <th></th>
+        <th>{{ 'bind_columns.csv_field'|trans({}, 'qwelukecsvimporter') }}</th>
+        </thead>
+        <tbody>
+        {% for column in form.columns %}
+            <tr class="{{ column.checkbox.vars.required ? 'warning' : '' }}">
+                <td>{{ form_widget(column.checkbox) }}</td>
+                <td>
+                    {{ column.vars.value.column }}
+                </td>
+                <td class="text-right">→</td>
+                <td>{{ form_widget(column.mappedChoice) }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfooot>
+            <tr class="warning">
+                <td colspan="4">{{ 'bind_columns.form_yellow'|trans({}, 'qwelukecsvimporter') }}</td>
+            </tr>
+        </tfooot>
+    </table>
+
+    {{ form_rest(form) }}
+
+    <p>
+        <button class="btn btn-lg btn-primary" role="button"
+                type="submit">{{ 'form.submit'|trans({}, 'qwelukecsvimporter_form') }}</button>
+    </p>
+    {{ form_end(form) }}
+{% endblock %}

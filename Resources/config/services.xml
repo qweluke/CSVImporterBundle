@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <!--
+    <services>
+        <service id="qweluke_csv_importer.example" class="Qweluke\CSVImporterBundle\Example">
+            <argument type="service" id="service_id" />
+            <argument>plain_value</argument>
+            <argument>%parameter_name%</argument>
+        </service>
+    </services>
+    -->
+
+
+    <services>
+        <service id="qweluke_csv_importer.file_validator" class="Qweluke\CSVImporterBundle\Service\FileValidator">
+            <argument>%qweluke_csvimporter_requiredfields%</argument>
+            <argument>%qweluke_csvimporter_fieldscount%</argument>
+        </service>
+
+        <service id="qweluke_csv_importer.file_importer" class="Qweluke\CSVImporterBundle\Service\FileImporter">
+            <argument type="service" id="qweluke_csv_importer.file_validator" />
+        </service>
+
+        <service id="qweluke_csv_importer.form_binder" class="Qweluke\CSVImporterBundle\Form\DataBindForm">
+            <argument>%qweluke_csvimporter_requiredfields%</argument>
+            <argument>%qweluke_csvimporter_requiredfields%</argument>
+        </service>
+
+    </services>
+
+</container>
