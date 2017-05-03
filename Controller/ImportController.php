@@ -62,12 +62,10 @@ class ImportController extends Controller
         $sessionData = $this->get('session')->get('qweluke_importer_data');
 
         // check if session data is setted. If no, redirect to import page
-        if(is_null($sessionData) || !isset($sessionData['import'])) {
+        if (is_null($sessionData) || !isset($sessionData['import'])) {
             $this->get('session')->getFlashBag()->add('info', 'Unable do bind types. Please import file first');
             return $this->redirectToRoute('qweluke_csv_importer_import');
         }
-
-        $sessionData = $sessionData['import'];
 
         //get user import class
         $extendedClass = $this->getParameter('qweluke_csvimporter_import_class');
@@ -76,16 +74,18 @@ class ImportController extends Controller
         $entityColumns = $this->getDoctrine()->getManager()->getClassMetadata($extendedClass)->getFieldNames();
 
         $form = $this->createForm(DataBindForm::class, null, [
-            'csvColumns' => array_keys($sessionData[0]),
-            'entityFields'=> $entityColumns,
+            'csvColumns' => array_keys($sessionData['import'][0]),
+            'entityFields' => $entityColumns,
             'requiredFields' => $this->getParameter('qweluke_csvimporter_requiredfields'),
-            'attr' => [ 'id' => 'qweluke_databinding' ],
+            'attr' => [
+                'id' => 'qweluke_databinding'
+            ],
             'action' => $this->generateUrl('qweluke_csv_importer_bind')
         ]);
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             /** @var array $binding */
             $binding = $form->get('columns')->getData();
@@ -93,7 +93,7 @@ class ImportController extends Controller
             $importer = $this->get('qweluke_csv_importer.file_importer');
 
             /** prepare import data and save it! */
-            $prepared = $importer->prepareData($sessionData, $binding, $entityColumns);
+            $prepared = $importer->prepareData($sessionData['import'], $binding, $entityColumns);
             $response = $importer->import($prepared);
 
             $this->get('session')->set('qweluke_importer_data', ['summary' => $response]);
@@ -106,20 +106,24 @@ class ImportController extends Controller
         ]);
     }
 
+    /**
+     * Step 3: summary details
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function summaryAction()
     {
         $sessionData = $this->get('session')->get('qweluke_importer_data');
 
         // check if session data is setted. If no, redirect to import page
-        if(is_null($sessionData) || !isset($sessionData['summary'])) {
+        if (is_null($sessionData) || !isset($sessionData['summary'])) {
             $this->get('session')->getFlashBag()->add('info', 'Please import file first.');
             return $this->redirectToRoute('qweluke_csv_importer_import');
         }
 
-        $sessionData = $sessionData['summary'];
 
         return $this->render('QwelukeCSVImporterBundle:Default:summary.html.twig', [
-            'summary' => $sessionData
+            'summary' => $sessionData['summary']
         ]);
     }
 }
