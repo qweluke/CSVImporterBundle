@@ -1,5 +1,5 @@
 {
-  "name": "qweluke/csvImporterBundle",
+  "name": "qweluke/csv-importer-bundle",
   "type": "symfony-bundle",
   "description": "Allows you to easly import any kind of CSV file to MySQL database",
   "keywords": ["csv", "import"],
@@ -16,12 +16,12 @@
     "symfony/framework-bundle": "~3.2"
   },
   "autoload": {
-    "psr-0": { "Qweluke\\CSVImporterBundle": "" }
+    "psr-4": { "Qweluke\\CSVImporterBundle": "" }
   },
   "target-dir": "Qweluke/CSVImporter",
   "extra": {
     "branch-alias": {
-      "dev-master": "1.0-dev"
+      "dev-master": "1.x-dev"
     }
   }
 }
