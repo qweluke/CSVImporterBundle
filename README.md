@@ -98,7 +98,7 @@ qweluke_csv_importer:
 php app/console doctrine:schema:update --force
 ```
 
-You can now use bundle. Go to `http://yourdomain.tdl/app_dev.php/import-csv`!
+You can now use bundle. Go to `http://yourdomain.tdl/import-csv`!
 
 ### make it prettier ;-)
 #### Importing styles
