@@ -99,3 +99,12 @@ php app/console doctrine:schema:update --force
 ```
 
 You can now use bundle. Go to `http://yourdomain.tdl/app_dev.php/import-csv`!
+
+
+### example import file:
+https://raw.githubusercontent.com/qweluke/CSVImporterBundle/master/example_file.csv
+
+### screenshots:
+
+![import-csv](https://github.com/qweluke/CSVImporterBundle/blob/master/1493795917982screensave.png?raw=true)
+![bind-data](https://github.com/qweluke/CSVImporterBundle/blob/master/1493795962252screensave.png?raw=true)
