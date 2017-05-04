@@ -7,7 +7,7 @@ namespace Qweluke\CSVImporterBundle\Entity;
  * Interface ImportInterface
  * @package Qweluke\CSVImporterBundle\Model
  */
-interface AbstractImportInterface
+interface BaseImportInterface
 {
 
     /**

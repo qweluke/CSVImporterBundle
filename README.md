@@ -47,12 +47,12 @@ public function registerBundles()
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Qweluke\CSVImporterBundle\Entity\AbstractImport;
+use Qweluke\CSVImporterBundle\Entity\BaseImport;
 
 /**
  * @ORM\Entity()
  */
-class Import extends AbstractImport
+class Import extends BaseImport
 {
     /**
      * @ORM\Id

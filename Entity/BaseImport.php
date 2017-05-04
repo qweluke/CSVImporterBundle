@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @package Qweluke\CSVImporterBundle\Model
  *
  */
-abstract class AbstractImport implements AbstractImportInterface
+abstract class BaseImport implements BaseImportInterface
 {
 
     /**
