@@ -116,7 +116,7 @@ class FileImporter
                 $colname = $ormTableColNames[$colName];
 
                 /** create assoc array mysqlColName => csvColumnValue */
-                $importRow[$colname] = $row[$key];
+                $importRow[$colname] = htmlspecialchars($row[$key]);
             }
 
             $toImport[] = $importRow;
@@ -141,7 +141,6 @@ class FileImporter
      */
     public function import(array $parsedData)
     {
-
         $stopwatch = new Stopwatch();
         $stopwatch->start('inserting');
 
@@ -150,7 +149,6 @@ class FileImporter
 
         $this->em->getConnection()->transactional(function ($connection) use ($parsedData, $tableName) {
             foreach ($parsedData['toImport'] as $row) {
-
                 $connection->insert($tableName, $row);
             }
         });
