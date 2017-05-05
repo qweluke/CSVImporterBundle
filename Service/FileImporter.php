@@ -116,7 +116,7 @@ class FileImporter
                 $colname = $ormTableColNames[$colName];
 
                 /** create assoc array mysqlColName => csvColumnValue */
-                $importRow[$colname] = htmlspecialchars($row[$key]);
+                $importRow[$colname] = htmlspecialchars($row[$key], ENT_QUOTES | ENT_SUBSTITUTE, 'utf-8');
             }
 
             $toImport[] = $importRow;
