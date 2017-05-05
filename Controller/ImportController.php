@@ -62,7 +62,7 @@ class ImportController extends Controller
         $sessionData = $this->get('session')->get('qweluke_importer_data');
 
         // check if session data is setted. If no, redirect to import page
-        if (is_null($sessionData) || !isset($sessionData['import'])) {
+        if (null === $sessionData) {
             $this->get('session')->getFlashBag()->add('info', 'Unable do bind types. Please import file first');
             return $this->redirectToRoute('qweluke_csv_importer_import');
         }
@@ -74,7 +74,7 @@ class ImportController extends Controller
         $entityColumns = $this->getDoctrine()->getManager()->getClassMetadata($extendedClass)->getFieldNames();
 
         $form = $this->createForm(DataBindForm::class, null, [
-            'csvColumns' => array_keys($sessionData['import'][0]),
+            'csvColumns' => array_keys($sessionData['import'][0]), //[0] because we are getting column names
             'entityFields' => $entityColumns,
             'requiredFields' => $this->getParameter('qweluke_csvimporter_requiredfields'),
             'attr' => [
@@ -116,7 +116,7 @@ class ImportController extends Controller
         $sessionData = $this->get('session')->get('qweluke_importer_data');
 
         // check if session data is setted. If no, redirect to import page
-        if (is_null($sessionData) || !isset($sessionData['summary'])) {
+        if (null === $sessionData) {
             $this->get('session')->getFlashBag()->add('info', 'Please import file first.');
             return $this->redirectToRoute('qweluke_csv_importer_import');
         }
